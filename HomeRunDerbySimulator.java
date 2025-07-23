@@ -5,439 +5,127 @@
  * Gabriel Flores
  * 12/14/18
  */
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class HomerunDerby {
-    public enum Coin {
-        Heads, Tails
-    };
+
+    // Constants for bat sizes
+    static final int SMALL_BAT = 31;
+    static final int MEDIUM_BAT = 32;
+    static final int LARGE_BAT = 33;
+
+    static Scanner scanner = new Scanner(System.in);
+    static Random rand = new Random();
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        boolean youFirst = true;
-        boolean youSecond = true;
-        Random randomNum = new Random();
-        int result;
-        int heads = 0;
-        boolean h = (heads == 0);
-        int tails = 1;
-        boolean t = (tails == 1);
-        // converted int to boolean
-        Coin coinFlip;
-        result = randomNum.nextInt(2);
-        // coin flip info
-        int l = 31;
-        boolean a = (l != 0);
-        int m = 32;
-        boolean b = (m != 0);
-        int n = 33;
-        boolean c = (n != 0);
-        // bat operators
+        // Welcome message and player setup
+        System.out.println("  *** Welcome to the Show's Annual Home Run Derby! ***");
+        System.out.print("Enter your name: ");
+        String player = scanner.nextLine();
+
+        // Bat size selection
+        System.out.println(player + ", your opponent today is Handsome Ron.");
+        System.out.print("Choose your bat size (31, 32, or 33 inches): ");
+        int batSize = scanner.nextInt();
+
+        // Coin toss to determine who bats first
+        System.out.println("Flipping a coin to decide who bats first...");
+        pause();
+
+        boolean youGoFirst = rand.nextBoolean(); // true = player goes first
+        System.out.println("Coin flip result: " + (youGoFirst ? "Heads! You bat first!" : "Tails! Ron bats first!"));
+        pause();
+
+        // Score tracking
         int yourScore = 0;
         int ronScore = 0;
-        // score variables
-        System.out.println("  ***!Welcome to the Show's annual HomeRun Derby!***     ");
-        System.out.println("Enter name:");
-        String player = input.nextLine();
-        System.out.println(player + ",your opponent for today is Handsom Ron.");
-        System.out.println("Choose your bat size," + "Options: 31inch 32inch 33inch");
-        double batSize = input.nextDouble();
-        System.out.println("Do a coin toss! " + "Heads go first.");
-        entCont();
-        if (result == 0) {
-            coinFlip = Coin.Heads;
-            youFirst = true;
-            System.out.println("You flipped Heads!");
-            System.out.println("You are first.Batter up!");
+
+        // Game flow based on coin flip
+        if (youGoFirst) {
+            System.out.println("You're up to bat!");
+            yourScore = performBatting(batSize, true); // player's turn
+
+            System.out.println("Now Handsome Ron takes the plate...");
+            ronScore = performBatting(0, false);       // Ron's turn
         } else {
-            coinFlip = Coin.Tails;
-            youSecond = true;
-            System.out.println("You flipped Tails!");
-            System.out.println("Handsom Ron is first.You're in the hole!");
+            System.out.println("Handsome Ron bats first!");
+            ronScore = performBatting(0, false);       // Ron's turn
+
+            System.out.println("Now it's your turn!");
+            yourScore = performBatting(batSize, true); // player's turn
         }
-        // coin toss
-        if (result == 0) {
-            System.out.println("Check your swing one last time!");
-            entCont();
+
+        // Final results
+        System.out.println("\n--- Final Score ---");
+        System.out.println(player + ": " + yourScore);
+        System.out.println("Handsome Ron: " + ronScore);
+
+        // Winner announcement
+        if (yourScore > ronScore) {
+            System.out.println("You are the winner! Come back next year to defend your title.");
+        } else if (ronScore > yourScore) {
+            System.out.println("Handsome Ron says: 'Sorry pal, maybe next time.'");
         } else {
-            System.out.println("Time the pitcher meanwhile");
-            entCont();
+            System.out.println("It's a tie! What a showdown!");
         }
-        // tells user if to go first or second
-        if (result == 0) {
-            if (youFirst == h) {
-                if (batSize == l == youFirst) {
-                    System.out.println(batSize + " inches is smaller than usual");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 55);
-                        xNew = Math.min(xNew, 475);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == m == youFirst) {
-                    System.out.println(batSize + " inches is the perfect size");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 155);
-                        xNew = Math.min(xNew, 555);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == n == youFirst) {
-                    System.out.println(batSize + " inches might be a little heavy");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 145);
-                        xNew = Math.min(xNew, 525);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                }
-            } else// else for opponent
-            {
-                System.out.println("HANDSOME RON IS UP TO BAT THE CROWD GOES WILD!!!");
-                entCont();
-                for (int i = 1; i <= 10; i++) {
-                    double x = Math.random();
-                    int xNew = (int) (x * 1000);
-                    xNew = Math.max(xNew, 305);
-                    xNew = Math.min(xNew, 505);
-                    System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                    if (xNew <= 30) {
-                        System.out.println("Foul!");
-                    } else if (xNew <= 449) {
-                        System.out.println("Sorry:( Not a Home Run");
-                    } else if (xNew >= 450) {
-                        System.out.println("Home Run!!!");
-                    }
-                    if (xNew >= 450) {
-                        ronScore++;
-                    }
-                }
-            } // opponent goes second
-        } // final code for if user flips heads
-        if (result == 0)// opponent flips heads goes first
-        {
-            if (youSecond == h) {
-                System.out.println("HANDSOME RON IS UP TO BAT THE CROWD GOES WILD!!!");
-                entCont();
-                for (int i = 1; i <= 10; i++) {
-                    double x = Math.random();
-                    int xNew = (int) (x * 1000);
-                    xNew = Math.max(xNew, 305);
-                    xNew = Math.min(xNew, 505);
-                    System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                    if (xNew <= 30) {
-                        System.out.println("Foul!");
-                    } else if (xNew <= 450) {
-                        System.out.println("Sorry:( Not a Home Run");
-                    } else if (xNew >= 450) {
-                        System.out.println("Home Run!!!");
-                    }
-                    if (xNew >= 450) {
-                        ronScore++;
-                    }
-                }
-            }
-            // opponent flips heads goes first
-            else {
-                System.out.println("you are up to bat!");
-                entCont();
-                if (batSize == l == youFirst) {
-                    System.out.println(batSize + "is smaller than usual");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 55);
-                        xNew = Math.min(xNew, 475);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == m == youFirst) {
-                    System.out.println(batSize + " is the perfect size");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 155);
-                        xNew = Math.min(xNew, 555);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == n == youFirst) {
-                    System.out.println(batSize + "might be a little heavy");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 145);
-                        xNew = Math.min(xNew, 525);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                }
-            }
-            System.out.println("Final score: " + player + ": " + yourScore + " Handsome Ron: " + ronScore);
-            if (ronScore > yourScore) {
-                System.out.println("Handsome Ron says, sorry pal maybe next time.");
-            } else {
-                System.out.println("You are a winner! Come back next year to defend your title.");
-            }
-        } // final code for if opponent flips heads
-        if (result == 1)// code for both users if tails is flipped
-        {
-            if (youFirst == t)// opponent goes first
-            {
-                System.out.println("HANDSOME RON IS UP TO BAT THE CROWD GOES WILD!!!");
-                entCont();
-                for (int i = 1; i <= 10; i++) {
-                    double x = Math.random();
-                    int xNew = (int) (x * 1000);
-                    xNew = Math.max(xNew, 305);
-                    xNew = Math.min(xNew, 505);
-                    System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                    if (xNew <= 30) {
-                        System.out.println("Foul!");
-                    } else if (xNew <= 449) {
-                        System.out.println("Sorry:( Not a Home Run");
-                    } else if (xNew >= 450) {
-                        System.out.println("Home Run!!!");
-                    }
-                    if (xNew >= 450) {
-                        ronScore++;
-                    }
-                }
-            } else// user goes second
-            {
-                System.out.println("you are up to bat!");
-                entCont();
-                if (batSize == l == youFirst) {
-                    System.out.println(batSize + "is smaller than usual");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 55);
-                        xNew = Math.min(xNew, 475);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == m == youFirst) {
-                    System.out.println(batSize + " inches is the perfect size");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 155);
-                        xNew = Math.min(xNew, 555);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == n == youFirst) {
-                    System.out.println(batSize + " inches might be a little heavy");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 145);
-                        xNew = Math.min(xNew, 525);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                }
-            }
-        } // final code for if user flips tails
-        if (result == 1)// code for tails if opponent flips tails, user goes second
-        {
-            if (youSecond == t)// user goes first since opponent flipped tails
-            {
-                System.out.println("you are up to bat!");
-                entCont();
-                if (batSize == l == youFirst) {
-                    System.out.println(batSize + " inches is smaller then usual");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 55);
-                        xNew = Math.min(xNew, 475);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == m == youFirst) {
-                    System.out.println(batSize + " inches is the perfect size");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 155);
-                        xNew = Math.min(xNew, 555);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else if (batSize == n == youFirst) {
-                    System.out.println(batSize + " inches might be a litle heavy");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 145);
-                        xNew = Math.min(xNew, 525);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            yourScore++;
-                        }
-                    }
-                } else// opponent is up to bat
-                {
-                    System.out.println("HANDSOME RON IS UP TO BAT THE CROWD GOES WILD!!!");
-                    entCont();
-                    for (int i = 1; i <= 10; i++) {
-                        double x = Math.random();
-                        int xNew = (int) (x * 1000);
-                        xNew = Math.max(xNew, 305);
-                        xNew = Math.min(xNew, 505);
-                        System.out.println("Hit number " + i + " is " + xNew + " ft.");
-                        if (xNew <= 30) {
-                            System.out.println("Foul!");
-                        } else if (xNew <= 449) {
-                            System.out.println("Sorry:( Not a Home Run");
-                        } else if (xNew >= 450) {
-                            System.out.println("Home Run!!!");
-                        }
-                        if (xNew >= 450) {
-                            ronScore++;
-                        }
-                    }
-                }
-            }
-            System.out.println("Final score: " + player + ": " + yourScore + " Handsome Ron: " + ronScore);
-            if (ronScore > yourScore) {
-                System.out.println("Handsome Ron says, sorry pal maybe next time.");
-            } else {
-                System.out.println("You are a winner! Come back next year to defend your title.");
-            }
-        } // final instructions for if tails is flipped
     }
 
-    public static void entCont() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Press Enter to Continue");
-        s.nextLine();
+    /**
+     * Simulates a batting round for 10 pitches.
+     * Calculates random distances based on bat size or Ron’s preset range.
+     */
+    public static int performBatting(int batSize, boolean isPlayer) {
+        int min, max;
+
+        if (!isPlayer) {
+            // Handsome Ron always uses fixed power values
+            min = 305;
+            max = 505;
+        } else if (batSize == SMALL_BAT) {
+            System.out.println("31\" bat selected – smaller than usual.");
+            min = 55; max = 475;
+        } else if (batSize == MEDIUM_BAT) {
+            System.out.println("32\" bat selected – perfect size.");
+            min = 155; max = 555;
+        } else if (batSize == LARGE_BAT) {
+            System.out.println("33\" bat selected – might be a little heavy.");
+            min = 145; max = 525;
+        } else {
+            // Fallback if bat size is invalid
+            System.out.println("Invalid bat size, defaulting to 32\".");
+            min = 155; max = 555;
+        }
+
+        pause();
+
+        int score = 0;
+        for (int i = 1; i <= 10; i++) {
+            // Generate a random hit distance between min and max
+            int distance = Math.max(min, Math.min((int)(Math.random() * 1000), max));
+            System.out.println("Hit " + i + ": " + distance + " ft.");
+
+            // Display hit outcome
+            if (distance <= 30) {
+                System.out.println("Foul!");
+            } else if (distance < 450) {
+                System.out.println("Not a home run.");
+            } else {
+                System.out.println("Home Run!");
+                score++;
+            }
+        }
+
+        return score;
+    }
+
+    /**
+     * Pauses the game and waits for user input to continue.
+     */
+    public static void pause() {
+        System.out.println("Press Enter to continue...");
+        scanner.nextLine();
+        if (scanner.hasNextLine()) scanner.nextLine();
     }
 }
