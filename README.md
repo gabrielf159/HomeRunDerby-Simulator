@@ -41,16 +41,11 @@ java HomerunDerby
 
 Sample Gameplay
 
-*** Welcome to the Show's Annual Home Run Derby! ***
-Enter name: Gabriel
-Gabriel, your opponent today is Handsome Ron.
-Choose your bat size: 32
-Coin toss... You flipped Heads! You bat first!
-Hit 1 is 465 ft. — Home Run!!!
-Hit 2 is 428 ft. — Not a Home Run
-...
-Final Score: Gabriel: 5 | Handsome Ron: 3
-You are a winner! Come back next year to defend your title.
+<img width="628" height="707" alt="HRD 1" src="https://github.com/user-attachments/assets/7fb8dcd4-cab3-4d66-ac5c-be338e13d32f" />
+
+<img width="455" height="500" alt="HRD 2" src="https://github.com/user-attachments/assets/b302d739-b89d-4a50-bd0c-e422b72eae92" />
+
+
 
 
 Author
