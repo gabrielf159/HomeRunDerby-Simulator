@@ -1,6 +1,7 @@
 # Home Run Derby Simulator
 
-A fun, interactive Java console game where you challenge "Handsome Ron"(my computer science HS teacher) in a home run showdown. Perfect for demonstrating core Java concepts like user input, randomness, conditionals, and loops — all wrapped in a baseball-themed experience.
+A fun, interactive Java console game where you challenge "Handsome Ron"(my computer science HS teacher) in a home run showdown. Perfect for demonstrating core Java concepts like user input, randomness, conditionals, and loops — all wrapped in a baseball-themed experience. Crafted as a fun way to apply Java programming fundamentals in a creative game.
+
 
 ---
 
@@ -51,4 +52,3 @@ Sample Gameplay
 Author
 
 Gabriel Flores
-Crafted as a fun way to apply Java programming fundamentals in a creative game.
